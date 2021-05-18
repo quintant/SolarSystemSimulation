@@ -62,11 +62,13 @@ class SpaceManager:
         self.garbage = []
 
     def __iteration(self, planet: Planet):
-        for p in self.solarSystem:
-            if p.ID != planet.ID:
-                xdiff = planet.pos[0] - p.pos[0]
-                ydiff = planet.pos[1] - p.pos[1]
-                rad2 = sqrt(xdiff**2 + ydiff**2)
-                if rad2 < 50 or p.ID == -1:
-                    planet + p
-        return
+        if -500 < planet.pos[0] < 1000 or -500 < planet.pos[1] < 1000:
+            for p in self.solarSystem:
+                if p.ID != planet.ID:
+                    xdiff = planet.pos[0] - p.pos[0]
+                    ydiff = planet.pos[1] - p.pos[1]
+                    rad2 = sqrt(xdiff**2 + ydiff**2)
+                    if rad2 < 50 or p.ID == -1:
+                        planet + p
+        else:
+            planet.delete = True

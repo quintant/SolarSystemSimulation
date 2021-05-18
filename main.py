@@ -13,7 +13,7 @@ def main():
     
     # initialize the pygame module
     pygame.init()
-    pygame.display.set_caption("minimal program")
+    pygame.display.set_caption("Solar System Sim")
 
     # clock = pygame.time.Clock()
     # fps_limit = 60
