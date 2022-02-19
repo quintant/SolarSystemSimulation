@@ -13,8 +13,11 @@
 - Objects that go very far away from the sun are destroyed.
   - They wont have much effect on other objects and wont be seen
   - Gets rid of most out of view objects -> faster simulation
+- Simulation runs on a separate thread.
+- Garbage collection of planets happens in the backround.
+- Smooth exit from simulation when exiting.
   
 \
 \
 \
-This is a small project done in one day.
+This is a small project done in one day. (+ some changes later on)

@@ -1,6 +1,6 @@
 # import the pygame module, so you can use it
+import threading
 from spaceManager import SpaceManager
-from planet import Planet
 import pygame
 black = (0,0,0)
 red = (255,0,0)
@@ -15,8 +15,8 @@ def main():
     pygame.init()
     pygame.display.set_caption("Solar System Sim")
 
-    # clock = pygame.time.Clock()
-    # fps_limit = 60
+    clock = pygame.time.Clock()
+    fps_limit = 60
     # create a surface on screen
     height = width = 1000
     mx = my = height // 2
@@ -26,24 +26,27 @@ def main():
     running = True
 
     space_manager = SpaceManager(300,  sun=True)
+    space_manager.start_simulation(screen=screen)
+
      
     # main loop
     while running:
-        # clock.tick(fps_limit)
+        clock.tick(fps_limit)
         # event handling, gets all event from the event queue
         for event in pygame.event.get():
             # only do something if the event is of type QUIT
             if event.type == pygame.QUIT:
                 # change the value to False, to exit the main loop
+                space_manager.end_simulation()
                 running = False
             if event.type == pygame.MOUSEBUTTONUP:
                 pos = pygame.mouse.get_pos()
                 space_manager.add(pos)
-        screen.fill(black)
 
-        space_manager.iterate(screen)
 
-        pygame.display.update()
+        with threading.Lock():
+            pygame.display.update()
+            screen.fill(black) # Blank screen after displaying
 
      
      
