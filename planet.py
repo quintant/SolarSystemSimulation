@@ -4,16 +4,18 @@ import numpy as np
 import pygame
 
 class Planet:
-    def __init__(self, mass=1, velocity=None, pos=None, color=None, maxWH=1000, ID=0) -> None:
+    def __init__(self, mass=1, velocity=None, pos=None, color=None, width=0, height=0, ID=0) -> None:
         # self.screen = screen
         self.mass = mass
         self.ID = ID
-        mid = maxWH/2
+        # midx = width/2
+        # midy = height/2
         v = 1
         self.velocity = [uniform(-v, v), uniform(-v, v)] if velocity is None else velocity
-        x = 200
-        self.pos = [randint(mid-x, mid+x), randint(mid-x, mid+x)] if pos is None else pos
+        x = 500
+        self.pos = [randint(0, width), randint(0, height)] if pos is None else pos
         self.color = [randint(100,255), randint(100,255), randint(100,255)] if color is None else color
+        if ID==-1: self.color = (150,150,50)
         self.G = 6.67408 * 10e-5  # 6.67408 * 10e-11
         self.delete = False
     
@@ -27,10 +29,15 @@ class Planet:
         radius2 = diff[0]**2 + diff[1]**2
         if radius2 < 1e-14: radius2 = 1e-14
         if sqrt(radius2) <= log(pi * pow(self.mass, 2)) + log(pi * pow(other.mass, 2)):
-            other.mass = 0
-            self.mass +=other.mass
+            # other.mass = 0
+            if self.mass>=other.mass:
+                self.mass +=other.mass
+                other.delete = True
+            else:
+                other.mass += self.mass
+                self.delete
+                
             # self.velocity = [x + y for x, y in zip(self.velocity, other.velocity)]
-            other.delete = True
 
         # theta = atan2(ydiff, xdiff)
         theta = np.arctan2(diff[1], diff[0])
