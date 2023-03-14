@@ -17,7 +17,7 @@ def rad(mass, norm=False):
 def massDist(mu=1, sigma=.5):
     return lognormvariate(mu=mu, sigma=sigma)
 
-def posDist(mu, sigma=100, p=10, pf=cos):
+def posDist(mu, sigma=600, p=10, pf=cos):
     # return normalvariate(mu, sigma=sigma)
-    n = normalvariate(100, sigma=sigma) * pf(p)
+    n = normalvariate(300, sigma=sigma) * pf(p)
     return n + mu

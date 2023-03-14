@@ -19,9 +19,16 @@ class Planet:
             if velocity is None
             else np.array(velocity)
         )
-        ppp = uniform(0, 2*pi)
+        ppp = uniform(0, 2 * pi)
         self.pos: np.ndarray = (
-            np.array([posDist(mu = width/2, p=ppp, pf=cos), posDist(mu=height/2, p=ppp, pf=sin)]) if pos is None else pos
+            np.array(
+                [
+                    posDist(mu=width / 2, p=ppp, pf=cos),
+                    posDist(mu=height / 2, p=ppp, pf=sin),
+                ]
+            )
+            if pos is None
+            else pos
         )
         self.color = (
             [randint(100, 255), randint(100, 255), randint(100, 255)]
