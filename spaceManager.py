@@ -245,7 +245,7 @@ class SpaceManager:
                     radius = max(1, int(mass ** (1/3)))
                     if i == 0:
                         # Draw the sun with a distinctive color
-                        color = (255, 255, 0)  # Yellow color for the sun
+                        color = (0, 0, 255)  # Blue color for the sun
                         radius = max(radius, 8)  # Ensure the sun is prominent
                     else:
                         color = (255, 255, 255)  # White color for other particles
